@@ -123,38 +123,49 @@
   <!-- link your javascript files here. (Must be after jquery is linked!
       You should be able to explain why that is to be "employer ready".) -->
   <script>
-    $("#currentDay").text(moment().format("dddd, MMMM Do"));
+   $("#currentDay").text(moment().format("dddd, MMMM Do"));
 
     function updateTime() {
-      var currenthours = moment().hours();
+      var currenthours = moment().hour();
       $(".time-block").each(function(){
         //"this" = "timeblock", splits number (string), turns string number into REAL number
         var hours = parseInt($(this).attr("id").split("-")[1]);
-
-        if (hours < currenthours){
+        console.log(hours);
+        if (currenthours > hours){
           $(this).addClass("past");
         }
-        else if (hours = currenthours){
-          $(this).addClass("current");
-          $(this).empty("past");
+        else if (hours === currenthours){
+          $(this).remove("past");
+          $(this).addClass("present");
         }
-        else if (hours > currenthours){
+        else {
+          $(this).remove("past");
+          $(this).remove("present");
           $(this).addClass("future");
-          $(this).empty("past","current");
         }
-      });
-
-    }
+          });
+    
+        }
     updateTime();//maybe interval????
 
-    $(".saveBtn").on("click",function(){
+  $(".saveBtn").on("click",function(){
       var description = $(this).siblings(".description").val();
       var scheduleTime = $(this).parent().attr("id");
       localStorage.setItem(scheduleTime, description);
 
-    });
+  }); 
+  
+ $(".description #hour-9").val(localStorage.getItem("hour-9")); 
+ $(".description #hour-10").val(localStorage.getItem("hour-10")); 
+ $(".description #hour-11").val(localStorage.getItem("hour-11")); 
+ $(".description #hour-12").val(localStorage.getItem("hour-12")); 
+ $(".description #hour-13").val(localStorage.getItem("hour-13")); 
+ $(".description #hour-14").val(localStorage.getItem("hour-14")); 
+ $(".description #hour-15").val(localStorage.getItem("hour-15")); 
+ $(".description #hour-16").val(localStorage.getItem("hour-16")); 
+ $(".description #hour-17").val(localStorage.getItem("hour-17")); 
 
-    $(".description #hour-9").val(localStorage.getItem("hour-9"));
+
 /*
         $(function (){
           updateTime();
